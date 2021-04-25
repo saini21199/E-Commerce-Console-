@@ -1,4 +1,5 @@
 ﻿using E_commerce.Authencation;
+using E_commerce.CustomerOperation;
 using E_commerce.CustomerOrderDB;
 using E_commerce.InventoryDB;
 using E_commerce.InventoryOperation;
@@ -15,30 +16,34 @@ namespace E_commerce
             Authentication auth = new Authentication();
             MenuItem menulist = new MenuItem();
 
-            Console.WriteLine("Select any one type \n1.Customer \n2.Inventory Mangaer");
+            Console.WriteLine("Select any one type \n1.Customer \n2.Inventory Mangaer\n");
             int userInput = Convert.ToInt32(Console.ReadLine());
-
-            Boolean loggedIn = false;
+            Console.Clear();
             Boolean exit = true;
             while (exit){
                 auth.enterCredientials();
                 switch (userInput)
                 {
-                    case 1: loggedIn = auth.customerValidation();
-                        if (loggedIn && Inventory.productlist.Count > 0)
+                    case 1:  auth.customerValidation();
+                        
+                        if ( Inventory.productlist.Count > 0)
                         {
+                            ItemSelection selectItem = new ItemSelection();
                             while (true)
                             {
-                                menulist.displayMenu();
-                                menulist.selectProduct();
+                                menulist.displayCustomerMenu();
+                                selectItem.selectProduct();
                                 Receipt receipt = new Receipt();
                                 receipt.generateReceipt();
                                 receipt.displayReceipt();
-                                Console.WriteLine("Would you like to place a New Order");
+                                Console.WriteLine("Would you like to place a New Order? (Y/N)");
+                                CustomerOrderItem.customerOrder.Clear();
                                 char ch = Convert.ToChar(Console.ReadLine());
+                                Console.Clear();
                                 if (ch == 'N'){
-                                    Console.WriteLine("Would you like to LogIn as Inventory manager");
+                                    Console.WriteLine("Would you like to LogIn as Inventory manager? (Y/N)");
                                     char choice = Convert.ToChar(Console.ReadLine());
+                                    Console.Clear();
                                     if (choice == 'Y')
                                     {
                                         userInput = 2;
@@ -55,9 +60,10 @@ namespace E_commerce
                             }
                         }
                         else {
-                            Console.WriteLine("No products Available ");
-                            Console.WriteLine("Would you like to LogIn as Inventory manager");
+                            Console.WriteLine("No products Available");
+                            Console.WriteLine("Would you like to LogIn as Inventory manager (Y/N)\n");
                             char ch = Convert.ToChar(Console.ReadLine());
+                            Console.Clear();
                             userInput = 2;
                             if (ch != 'Y')
                                 exit = false;
@@ -69,6 +75,7 @@ namespace E_commerce
                         while (true)
                         {   
                             int input = menulist.displayInventoryMenu();
+                            Console.Clear();
                             switch (input)
                             {
                                 case 1:
@@ -83,11 +90,13 @@ namespace E_commerce
                                     operation.display();
                                     break;
                             }
-                            Console.WriteLine("Want to do any other operation ?");
+                            Console.WriteLine("\nWant to do any other operation? (Y/N)");
                             char ch = Convert.ToChar(Console.ReadLine());
+                            Console.Clear();
                             if (ch == 'N') {
-                                Console.WriteLine("Would you like to LogIn as Customer");
+                                Console.WriteLine("Would you like to LogIn as Customer? (Y/N)");
                                 char choice = Convert.ToChar(Console.ReadLine());
+                                Console.Clear();
                                 if (choice == 'Y')
                                 {
                                     userInput = 1;

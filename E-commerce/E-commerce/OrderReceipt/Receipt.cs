@@ -11,17 +11,17 @@ namespace E_commerce.OrderReceipt
         Order order = new Order();
 
         public void generateReceipt() {
-            Console.WriteLine(customerOrder.Count);
             customerOrder.ForEach((prod) => { 
                 order.totalPrice += prod.Price;
                 order.productOrdered.Add(prod.Name);
             }); 
         }
         public void displayReceipt() {
-            Console.WriteLine("Order Reference ID :" + Order.orderId);
+            Console.WriteLine("ORDER GENERATED\n");
+            Console.WriteLine("Order Reference ID :" + Order.orderId + "\n");
             Console.WriteLine("Product Bought :\n");
             order.productOrdered.ForEach((item) => Console.WriteLine(item));
-            Console.WriteLine("Total Price : " + order.totalPrice);
+            Console.WriteLine("\nTotal Price : " + order.totalPrice + "\n");
         }
     }
 }

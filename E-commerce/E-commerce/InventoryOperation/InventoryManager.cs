@@ -12,34 +12,35 @@ namespace E_commerce.InventoryOperation
 
             Product manageProduct = new Product();
 
-            Console.WriteLine("Enter Product Name\n");
+            Console.WriteLine("Enter Product Name:");
             manageProduct.Name = Console.ReadLine();
-
-            Console.WriteLine("Enter Product Quantity\n");
+            Console.WriteLine("\nEnter Product Quantity:");
             manageProduct.Quantity = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("Enter Product Price\n");
+            Console.WriteLine("\nEnter Product Price:");
             manageProduct.Price = Convert.ToInt32(Console.ReadLine());
 
             Inventory.productlist.Add(manageProduct);
 
-            Console.WriteLine("Successfully Added !");
+            Console.WriteLine("\nSuccessfully Added!");
         }
 
         public void Update() {
             while (true)
             {
                 bool found = false;
-                Console.WriteLine("Enter Product Id You want to update\n");
+                Console.WriteLine("Enter Product Id you want to update :");
                 int id = Convert.ToInt32(Console.ReadLine());
+                Console.Clear();
                 int index = 0;
                 foreach (var prod in Inventory.productlist) {
                     if (prod.Id == id)
                     {
                         found = true;
                         Console.WriteLine("What You want to update\n");
-                        Console.WriteLine("1.Name\n2.Price\n3.Quantity");
+                        Console.WriteLine("1.Name\n2.Price\n3.Quantity\n");
                         int input = Convert.ToInt32(Console.ReadLine());
+                        Console.Clear();
                         Console.WriteLine("Enter Updated Product value");
                         switch (input) {
                             case 1: 
@@ -55,7 +56,8 @@ namespace E_commerce.InventoryOperation
                                 Inventory.productlist[index].Price = Price;
                                 break;
                         }
-                        Console.WriteLine("Successfully Updated !");
+                        Console.Clear();
+                        Console.WriteLine("Successfully Updated!");
                         break;
                     }
                     
@@ -63,7 +65,7 @@ namespace E_commerce.InventoryOperation
                 }
                 if (found == false)
                 {
-                    Console.WriteLine("Invalid ID !");
+                    Console.WriteLine("Invalid ID !\n");
                 }
                 else break;
             }
@@ -71,17 +73,27 @@ namespace E_commerce.InventoryOperation
 
         public void display()
         {
-            Inventory.productlist.ForEach((prod) => 
-            Console.WriteLine("ID : " + prod.Id + "\n" + "Name : "+ prod.Name + "\n" + 
-            "Price : "+prod.Price + "\n" + "Quantity : " + prod.Quantity + "\n"));
+            if (Inventory.productlist.Count <= 0)
+                Console.WriteLine("No Available Inventory\n");
+            else
+            {
+                Console.WriteLine("Available Inventory\n");
+                Console.WriteLine("ID \tName \tPrice \tQuantity \n");
+                Inventory.productlist.ForEach((eachProduct) =>
+                {
+                    Console.WriteLine(eachProduct.Id + " \t" + eachProduct.Name + "\t" +
+                        eachProduct.Price + "\t" + eachProduct.Quantity);
+                });
+            }
         }
 
         public void Remove() {
             while (true)
             {
                 bool found = false;
-                Console.WriteLine("Enter Product Id You want to Remove\n");
+                Console.WriteLine("Enter Product Id You want to Remove :");
                 int id = Convert.ToInt32(Console.ReadLine());
+                Console.Clear();
                 int index = 0;
                 foreach (var prod in Inventory.productlist)
                 {
@@ -89,14 +101,14 @@ namespace E_commerce.InventoryOperation
                     {
                         found = true;
                         Inventory.productlist.RemoveAt(index);
-                        Console.WriteLine("Successfully Removed !");
+                        Console.WriteLine("Successfully Removed!");
                         break;
                     }
                     index++;
                 }
                 if (found == false)
                 {
-                    Console.WriteLine("Invalid ID !");
+                    Console.WriteLine("Invalid ID !\n");
                 }
                 else break;
             }

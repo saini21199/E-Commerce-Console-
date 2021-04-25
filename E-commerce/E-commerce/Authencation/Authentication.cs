@@ -14,7 +14,7 @@ namespace E_commerce.Authencation
 
             Console.WriteLine("Enter ID :");
             userId = Console.ReadLine();
-            Console.WriteLine("Enter Password");
+            Console.WriteLine("\nEnter Password :");
             userPassword = Console.ReadLine();
 
         }
@@ -23,11 +23,12 @@ namespace E_commerce.Authencation
             while (true) {
                 if (userId == defaultCustomerId && userPassword == defaultCustomerPassword)
                 {
-                    Console.WriteLine("Successfully Logged In !");
+                    Console.WriteLine("\nSuccessfully Logged In!\n");
                     return true;
                 }
                 else {
-                    Console.WriteLine("Invalid Credentials!!!");
+                    Console.Clear();
+                    Console.WriteLine("Invalid Credentials!!\n");
                     enterCredientials();
                 }
                 
@@ -40,13 +41,14 @@ namespace E_commerce.Authencation
             {
                 if (userId == defaultInventoryManagerId && userPassword == defaultInventoryManagerId)
                 {
-                        Console.WriteLine("Successfully Logged In !");
+                        Console.WriteLine("\nSuccessfully Logged In!\n");
                         return true ;
                     
                 }
                 else
                 {
-                    Console.WriteLine("Invalid Credentials!!!");
+                    Console.Clear();
+                    Console.WriteLine("Invalid Credentials!!\n");
                     enterCredientials();
                 }
             }
